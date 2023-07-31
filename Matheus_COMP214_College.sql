@@ -21,6 +21,7 @@ DROP TABLE SS_audit_logon CASCADE CONSTRAINTS;
 DROP TABLE SS_Advertisement_request CASCADE CONSTRAINTS;
 DROP TABLE SS_blocktest CASCADE CONSTRAINTS;
 DROP TABLE SS_trans_log CASCADE CONSTRAINTS;
+Drop table SS_audit_logon CASCADE CONSTRAINTS;
 
 drop sequence SS_categoryId_seq;
 drop sequence SS_advertisementId_seq;
@@ -73,31 +74,30 @@ CREATE SEQUENCE SS_advertisementId_seq;
 CREATE TABLE SS_Advertisement (
 	advertisementId number,
 	advertisementTitle varchar2(25) ,
-	advertisementDescription varchar2(100) ,
+	advertisementDescription varchar2(200) ,
 	advertisementImage blob,
 	price number(10,2),
-    sold boolean,
-	active boolean,
-    new boolean,
+    sold char(1),
+	active char(1),
+    new char(1),
 	saleStart date,
 	saleEnd date,
 	salePrice number(6,2),
 	stock number(5),
-    idCategory number(2),
+    idcategory number(2),
 	 CONSTRAINT advertisement_id_pk PRIMARY KEY(advertisementId),
-         CONSTRAINT advertisement_idCategory_fk FOREIGN KEY (CategoryId)
+         CONSTRAINT advertisement_idCategory_fk FOREIGN KEY (idcategory)
            REFERENCES SS_category (categoryId) );
 
-insert into SS_Advertisement 
- values(SS_advertisementId_seq.nextval,'Rich Dad Poor Dad','Rich Dad Poor Dad is the #1 personal finance book of all time. 
- Buy today to set yourself up for a wealthy, happy future.', EMPTY_BLOB(), 18.50, false, true, false, TO_DATE('2023-07-01', 'YYYY-MM-DD'),
- TO_DATE('2023-12-31', 'YYYY-MM-DD'), 16.50, 1, 2);
 
-insert into SS_Advertisement 
- values(SS_advertisementId_seq.nextval,'Zara Cargo Pants','Relaxed fit pants. Front pockets and back patch pockets.
- Multi-functional pockets at legs. Adjustable hem with elastic drawcords. Front zip and button closure.', EMPTY_BLOB(), 65.50,
- false, true, true, SYSDATE, SYSDATE, 65.50, 1, 2);
- 
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Rich Dad Poor Dad','Rich Dad Poor Dad is the #1 personal finance book of all time. 
+ Buy today to set yourself up for a wealthy, happy future.',EMPTY_BLOB(), 99.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 89.99, 100, 1);
+
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Tom and Jerry','Cartoon',EMPTY_BLOB(), 99.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 89.99, 100, 1);
+
+
 --insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
 --  values(3,'E','Eileen 4-cup French Press', 'A unique coffeemaker from those proud craftsmen in windy Normandy.', 'frepress.gif', 32.50, 1, 2);
 --
@@ -139,18 +139,19 @@ CREATE TABLE SS_Shopper (
 	UserName varchar2(8),
 	Password varchar2(8),
 	dtEntered date DEFAULT SYSDATE,
-	CONSTRAINT shopper_id_pk PRIMARY KEY(idShopper) );
+	CONSTRAINT SS_shopper_id_pk PRIMARY KEY(idShopper) );
 
---create sequence SS_shopper_seq
---  start with 1;
---insert into SS_shopper
---    values (21, 'John', 'Carter', '21 Front St.', 'Raleigh',
---            'NC', 'USA','54822', '9014317701', 'Crackjack@aol.com', 'Crackj',
---            'flyby', '13-JAN-2012');
---insert into SS_shopper
---    values (22, 'Margaret', 'Somner', '287 Walnut Drive', 'Cheasapeake',
---            'VA', 'USA','23321', '7574216559', 'MargS@infi.net', 'MaryS',
---            'pupper', '03-FEB-2012');
+
+create sequence SS_shopper_seq
+  start with 1;
+insert into SS_shopper
+    values (21, 'John', 'Carter', '21 Front St.', 'Raleigh',
+            'NC', 'USA','54822', '9014317701', 'Crackjack@aol.com', 'Crackj',
+            'flyby', '13-JAN-2012');
+insert into SS_shopper
+    values (22, 'Margaret', 'Somner', '287 Walnut Drive', 'Cheasapeake',
+            'VA', 'USA','23321', '7574216559', 'MargS@infi.net', 'MaryS',
+            'pupper', '03-FEB-2012');
 --insert into SS_shopper
 --    values (23, 'Kenny', 'Ratman', '1 Fun Lane', 'South Park',
 --            'NC', 'USA','54674', '9015680902', 'ratboy@msn.net', 'rat55',
@@ -175,56 +176,56 @@ CREATE TABLE SS_Shopper (
 --  ADD (promo CHAR(1));
 
 --###########Table 4###########
---CREATE TABLE SS_Basket (
---	idBasket number(5),
---	Quantity number(2),
---	idShopper number(4),
---	OrderPlaced number(1),
---	SubTotal number(7,2),
---	Total number(7,2),
---	Shipping number(5,2),
---	Tax number(5,2),
---	dtCreated date DEFAULT SYSDATE,
---	Promo number(2),
---	ShipFirstName varchar2(10),
---	ShipLastName varchar2(20),
---	ShipAddress varchar2(40),
---	ShipCity varchar2(20),
---	ShipState varchar2(2),
---	ShipZipCode varchar2(15),
---	ShipPhone varchar2(10),
---	ShipFax varchar2(10),
---	ShipEmail varchar2(25),
---	ShipProvince varchar2(20),
---	ShipCountry varchar2(20),
---	BillFirstName varchar2(10),
---	BillLastName varchar2(20),
---	BillAddress varchar2(40),
---	BillCity varchar2(20),
---	BillState varchar2(2),
---	BillZipCode varchar2(15),
---	BillPhone varchar2(10),
---	BillFax varchar2(10),
---	BillEmail varchar2(25),
---	BillProvince varchar2(20),
---	BillCountry varchar2(20),
---	dtOrdered date DEFAULT SYSDATE,
---	CardType char(1) ,
---	CardNumber varchar2(20) ,
---	ExpMonth char(2),
---        ExpYear char(4),
---	CardName varchar2(25),
---        shipbill char(1) default 'N',
---        ShipFlag char(1) default 'N',
---        CONSTRAINT bskt_id_pk PRIMARY KEY(idBasket),
---         CONSTRAINT bskt_idshopper_fk FOREIGN KEY (idShopper)
---           REFERENCES SS_Shopper(idShopper) );
---Create sequence SS_idBasket_seq
---   start with 25;
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (3, 3, 21, 1, 26.60, 32.40, 5.00, .80, '23-JAN-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (4, 1, 21, 1, 28.50, 34.36, 5.00, .86, '12-FEB-2012',0);
+CREATE TABLE SS_Basket (
+	idBasket number(5),
+	Quantity number(2),
+	idShopper number(4),
+	OrderPlaced number(1),
+	SubTotal number(7,2),
+	Total number(7,2),
+	Shipping number(5,2),
+	Tax number(5,2),
+	dtCreated date DEFAULT SYSDATE,
+	Promo number(2),
+	ShipFirstName varchar2(10),
+	ShipLastName varchar2(20),
+	ShipAddress varchar2(40),
+	ShipCity varchar2(20),
+	ShipState varchar2(2),
+	ShipZipCode varchar2(15),
+	ShipPhone varchar2(10),
+	ShipFax varchar2(10),
+	ShipEmail varchar2(25),
+	ShipProvince varchar2(20),
+	ShipCountry varchar2(20),
+	BillFirstName varchar2(10),
+	BillLastName varchar2(20),
+	BillAddress varchar2(40),
+	BillCity varchar2(20),
+	BillState varchar2(2),
+	BillZipCode varchar2(15),
+	BillPhone varchar2(10),
+	BillFax varchar2(10),
+	BillEmail varchar2(25),
+	BillProvince varchar2(20),
+	BillCountry varchar2(20),
+	dtOrdered date DEFAULT SYSDATE,
+	CardType char(1) ,
+	CardNumber varchar2(20) ,
+	ExpMonth char(2),
+        ExpYear char(4),
+	CardName varchar2(25),
+        shipbill char(1) default 'N',
+        ShipFlag char(1) default 'N',
+        CONSTRAINT SS_bskt_id_pk PRIMARY KEY(idBasket),
+         CONSTRAINT SS_bskt_idshopper_fk FOREIGN KEY (idShopper)
+           REFERENCES SS_Shopper(idShopper) );
+Create sequence SS_idBasket_seq
+   start with 25;
+insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
+    values (3, 3, 21, 1, 26.60, 32.40, 5.00, .80, '23-JAN-2012',0);
+insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
+    values (4, 1, 21, 1, 28.50, 34.36, 5.00, .86, '12-FEB-2012',0);
 --insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
 --    values (5, 4, 22, 1, 41.60, 48.47, 5.00, 1.87, '19-FEB-2012',0);
 --insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
@@ -261,25 +262,25 @@ CREATE TABLE SS_Shopper (
 --where idbasket = 12;
 
 --###########Table 5###########
---CREATE TABLE SS_basketItem (
---	idBasketItem number(2),
---	idAdvertisement number(2),
---	Price number(6,2),
---	Quantity number(2),
---	idBasket number(5) ,
---	option1 number(2),
---	option2 number(2),
---	CONSTRAINT bsktitem_id_pk PRIMARY KEY (idBasketItem),
---        CONSTRAINT bsktitem_bsktid_fk FOREIGN KEY (idBasket) 
---          REFERENCES SS_Basket(idBasket),
---        CONSTRAINT bsktitem_idprod_fk FOREIGN KEY (idAdvertisement) 
---          REFERENCES SS_Advertisement(idAdvertisement) );
---Create sequence SS_idBasketitem_seq
---  start with 50;
---insert into SS_basketItem
---      values (15, 6, 5.00, 1, 3, 1, 4);
---insert into SS_basketItem
---      values (16, 8, 10.80, 2, 3, 2, 4);
+CREATE TABLE SS_basketItem (
+	idBasketItem number(2),
+	idAdvertisement number(2),
+	Price number(6,2),
+	Quantity number(2),
+	idBasket number(5) ,
+	option1 number(2),
+	option2 number(2),
+	CONSTRAINT SS_bsktitem_id_pk PRIMARY KEY (idBasketItem),
+        CONSTRAINT SS_bsktitem_bsktid_fk FOREIGN KEY (idBasket) 
+          REFERENCES SS_Basket(idBasket),
+        CONSTRAINT SS_bsktitem_idprod_fk FOREIGN KEY (idAdvertisement) 
+          REFERENCES SS_Advertisement(Advertisementid) );
+Create sequence SS_idBasketitem_seq
+  start with 50;
+insert into SS_basketItem
+      values (15, 1, 5.00, 1, 3, 1, 4);
+insert into SS_basketItem
+      values (16, 2, 10.80, 2, 3, 2, 4);
 --insert into SS_basketItem
 --      values (17, 4, 28.50, 1, 4, NULL, NULL);
 --insert into SS_basketItem
@@ -334,35 +335,35 @@ CREATE TABLE SS_Shopper (
 --      values (43, 7, 5.40, 1, 16, 1, 3);
 
 --###########Table 6###########
---CREATE TABLE SS_Shipping (
---	idRange NUMBER(2),
---	Low NUMBER(3),
---	High NUMBER(3),
---	Fee NUMBER(6,2),
---	CONSTRAINT ship_idrange_pk PRIMARY KEY (idRange) ); 
---INSERT INTO SS_shipping  VALUES(1,1,5,5.00);
---INSERT INTO SS_shipping  VALUES(2,6,10,8.00);
---INSERT INTO SS_shipping  VALUES(3,11,99,11.00);
+CREATE TABLE SS_Shipping (
+idRange NUMBER(2),
+	Low NUMBER(3),
+	High NUMBER(3),
+	Fee NUMBER(6,2),
+	CONSTRAINT SS_ship_idrange_pk PRIMARY KEY (idRange) ); 
+INSERT INTO SS_shipping  VALUES(1,1,5,5.00);
+INSERT INTO SS_shipping  VALUES(2,6,10,8.00);
+INSERT INTO SS_shipping  VALUES(3,11,99,11.00);
 
 --###########Table 7###########
---CREATE TABLE SS_BasketStatus (
---	idStatus number(5),
---	idBasket number(5),
---	idStage number(1),
---	dtStage date,
---	Notes varchar2(50),
---        shipper varchar2(5),
---	ShippingNum varchar2(20),
---	CONSTRAINT  basketstatus_pk PRIMARY KEY (idStatus),
---        CONSTRAINT BasketStatus_idBasket_fk FOREIGN KEY (idBasket)
---          REFERENCES SS_basket(idBasket) );
---CREATE SEQUENCE SS_status_seq start with 15;
---INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
---     VALUES (1,3,1,'24-JAN-2012');
---INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
---     VALUES (2,3,5,'25-JAN-2012');
---INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
---     VALUES (3,4,1,'13-FEB-2012');
+CREATE TABLE SS_BasketStatus (
+	idStatus number(5),
+	idBasket number(5),
+	idStage number(1),
+	dtStage date,
+	Notes varchar2(50),
+        shipper varchar2(5),
+	ShippingNum varchar2(20),
+	CONSTRAINT  SS_basketstatus_pk PRIMARY KEY (idStatus),
+        CONSTRAINT SS_BasketStatus_idBasket_fk FOREIGN KEY (idBasket)
+          REFERENCES SS_basket(idBasket) );
+CREATE SEQUENCE SS_status_seq start with 15;
+INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
+     VALUES (1,3,1,'24-JAN-2012');
+INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
+     VALUES (2,3,5,'25-JAN-2012');
+INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
+     VALUES (3,4,1,'13-FEB-2012');
 --INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
 --     VALUES (4,4,5,'14-FEB-2012');
 --INSERT INTO SS_basketstatus
@@ -373,34 +374,34 @@ CREATE TABLE SS_Shopper (
 -- WHERE idstatus = 2;
 
 --###########View 1###########
---create view SS_basketitem_vu as
---   select * from SS_basketitem;
+create view SS_basketitem_vu as
+   select * from SS_basketitem;
 
 --###########Table 8###########
---create table SS_prod_sales (
---     idAdvertisement NUMBER(2),
---     month char(3),
---     year char(4),
---     qty number(5),
---     total number(6,2) );
+create table SS_prod_sales (
+     idAdvertisement NUMBER(2),
+     month char(3),
+     year char(4),
+     qty number(5),
+     total number(6,2) );
 
 --###########Table 9###########
---create table SS_shop_sales (
---     idshopper NUMBER(4),
---     total number(6,2) );
---CREATE SEQUENCE SS_prodreq_seq;
+create table SS_shop_sales (
+     idshopper NUMBER(4),
+     total number(6,2) );
+CREATE SEQUENCE SS_prodreq_seq;
 
 --###########View 2###########
---CREATE OR REPLACE VIEW SS_ship_vu
--- AS SELECT b.idbasket, b.shipflag, bs.idstage, bs.dtstage, bs.notes,
---            bs.shipper, bs.shippingnum
---      FROM SS_basket b, SS_basketstatus bs
---      WHERE b.idBasket = bs.idBasket;
+CREATE OR REPLACE VIEW SS_ship_vu
+ AS SELECT b.idbasket, b.shipflag, bs.idstage, bs.dtstage, bs.notes,
+            bs.shipper, bs.shippingnum
+      FROM SS_basket b, SS_basketstatus bs
+      WHERE b.idBasket = bs.idBasket;
 
 --###########Table 10###########
---CREATE TABLE SS_audit_logon
---  ( userid VARCHAR2(10),
---    logdate DATE );
+CREATE TABLE SS_audit_logon
+  ( userid VARCHAR2(10),
+    logdate DATE );
 
 --UPDATE SS_basket
 --  SET shipfirstname='John',shiplastname='Carter',
