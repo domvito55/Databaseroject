@@ -22,7 +22,6 @@ DROP TABLE SS_Advertisement_request CASCADE CONSTRAINTS;
 DROP TABLE SS_blocktest CASCADE CONSTRAINTS;
 DROP TABLE SS_trans_log CASCADE CONSTRAINTS;
 
-
 drop sequence SS_categoryId_seq;
 drop sequence SS_advertisementId_seq;
 
@@ -36,7 +35,7 @@ DROP SEQUENCE SS_prodreq_seq;
 
 -- ################### Category ####################
 create sequence SS_categoryId_seq;
-
+--###########Table 1###########
 CREATE TABLE SS_category (
 	categoryId number(2),
 	categoryName varchar2(25),
@@ -49,27 +48,28 @@ insert into SS_category
             and more');
 insert into SS_category 
    values(SS_categoryId_seq.nextval,'Clothes','Shirts, pants, underwear, and more');
-insert into SS_category 
-   values(SS_categoryId_seq.nextval,'Eletronics','Computers, cellphones, and more');
-insert into SS_category 
-   values(SS_categoryId_seq.nextval,'Furniture','Sofas, beds, tables, and more');
-insert into SS_category 
-   values(SS_categoryId_seq.nextval,'Musical Instruments','Guitars, Pianos, Drums,
-            and more');
-insert into SS_category 
-   values(SS_categoryId_seq.nextval,'Real State','Houses, apartments, offices, and
-            more for buy or rent');
-insert into SS_category 
-   values(SS_categoryId_seq.nextval,'Tools','cars, motorcycles, bicycles, and more');
-insert into SS_category 
-   values(SS_categoryId_seq.nextval,'Toys','Board games, dolls, video games 
-            and more');
-insert into SS_category 
-   values(SS_categoryId_seq.nextval,'Vehicles','Cars, motorcycles, bicycles,
-            and more');
+--insert into SS_category 
+--   values(SS_categoryId_seq.nextval,'Eletronics','Computers, cellphones, and more');
+--insert into SS_category 
+--   values(SS_categoryId_seq.nextval,'Furniture','Sofas, beds, tables, and more');
+--insert into SS_category 
+--   values(SS_categoryId_seq.nextval,'Musical Instruments','Guitars, Pianos, Drums,
+--           and more');
+--insert into SS_category 
+--   values(SS_categoryId_seq.nextval,'Real State','Houses, apartments, offices, and
+--            more for buy or rent');
+--insert into SS_category 
+--   values(SS_categoryId_seq.nextval,'Tools','cars, motorcycles, bicycles, and more');
+--insert into SS_category 
+--   values(SS_categoryId_seq.nextval,'Toys','Board games, dolls, video games 
+--            and more');
+--insert into SS_category 
+--   values(SS_categoryId_seq.nextval,'Vehicles','Cars, motorcycles, bicycles,
+--            and more');
 
 -- ################### Advertisement ####################
 CREATE SEQUENCE SS_advertisementId_seq;
+--###########Table 2###########
 CREATE TABLE SS_Advertisement (
 	advertisementId number,
 	advertisementTitle varchar2(25) ,
@@ -78,6 +78,7 @@ CREATE TABLE SS_Advertisement (
 	price number(10,2),
     sold boolean,
 	active boolean,
+    new boolean,
 	saleStart date,
 	saleEnd date,
 	salePrice number(6,2),
@@ -87,12 +88,16 @@ CREATE TABLE SS_Advertisement (
          CONSTRAINT advertisement_idCategory_fk FOREIGN KEY (CategoryId)
            REFERENCES SS_category (categoryId) );
 
---insert into SS_Advertisement(idAdvertisement, type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(1,'E','CapressoBar Model #351', 'A fully programmable pump espresso machine and 10-cup coffee maker complete with GoldTone filter', 'capresso.gif', 99.99, 1, 2);
---
---insert into SS_Advertisement(idAdvertisement, type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(2,'E','Capresso Ultima', 'Coffee and Espresso and Cappuccino Machine. Brews from one espresso to two six ounce cups of coffee', 'capresso2.gif', 129.99, 1, 2);
---
+insert into SS_Advertisement 
+ values(SS_advertisementId_seq.nextval,'Rich Dad Poor Dad','Rich Dad Poor Dad is the #1 personal finance book of all time. 
+ Buy today to set yourself up for a wealthy, happy future.', EMPTY_BLOB(), 18.50, false, true, false, TO_DATE('2023-07-01', 'YYYY-MM-DD'),
+ TO_DATE('2023-12-31', 'YYYY-MM-DD'), 16.50, 1, 2);
+
+insert into SS_Advertisement 
+ values(SS_advertisementId_seq.nextval,'Zara Cargo Pants','Relaxed fit pants. Front pockets and back patch pockets.
+ Multi-functional pockets at legs. Adjustable hem with elastic drawcords. Front zip and button closure.', EMPTY_BLOB(), 65.50,
+ false, true, true, SYSDATE, SYSDATE, 65.50, 1, 2);
+ 
 --insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
 --  values(3,'E','Eileen 4-cup French Press', 'A unique coffeemaker from those proud craftsmen in windy Normandy.', 'frepress.gif', 32.50, 1, 2);
 --
@@ -116,23 +121,26 @@ CREATE TABLE SS_Advertisement (
 --
 --insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
 --  values(10,'C','Espresso', 'dense, caramel-like sweetness with a soft acidity. Roasted somewhat darker than traditional Italian.', 'espresso.jpg', 10.00, 1, 1);
---  
----- ################ Advertisement ###################
---CREATE TABLE SS_Shopper (
---	idShopper number,
---	FirstName varchar2(15),
---	LastName varchar2(20),
---	Address varchar2(40),
---	City varchar2(20),
---	State char(2),
---	Country varchar2(15),
---	ZipCode varchar2(15),
---	Phone varchar2(10),
---	Email varchar2(25),
---	UserName varchar2(8),
---	Password varchar2(8),
---	dtEntered date DEFAULT SYSDATE,
---	CONSTRAINT shopper_id_pk PRIMARY KEY(idShopper) );
+
+
+-- ################### SHOPPER ####################
+--###########Table 3###########
+CREATE TABLE SS_Shopper (
+	idShopper number,
+	FirstName varchar2(15),
+	LastName varchar2(20),
+	Address varchar2(40),
+	City varchar2(20),
+	Province char(2),
+	Country varchar2(15),
+	ZipCode varchar2(15),
+	Phone varchar2(10),
+	Email varchar2(25),
+	UserName varchar2(8),
+	Password varchar2(8),
+	dtEntered date DEFAULT SYSDATE,
+	CONSTRAINT shopper_id_pk PRIMARY KEY(idShopper) );
+
 --create sequence SS_shopper_seq
 --  start with 1;
 --insert into SS_shopper
@@ -165,6 +173,8 @@ CREATE TABLE SS_Advertisement (
 --            '', 0, '14-FEB-2012', NULL, 'USA');
 --ALter table SS_shopper
 --  ADD (promo CHAR(1));
+
+--###########Table 4###########
 --CREATE TABLE SS_Basket (
 --	idBasket number(5),
 --	Quantity number(2),
@@ -185,6 +195,8 @@ CREATE TABLE SS_Advertisement (
 --	ShipPhone varchar2(10),
 --	ShipFax varchar2(10),
 --	ShipEmail varchar2(25),
+--	ShipProvince varchar2(20),
+--	ShipCountry varchar2(20),
 --	BillFirstName varchar2(10),
 --	BillLastName varchar2(20),
 --	BillAddress varchar2(40),
@@ -194,11 +206,9 @@ CREATE TABLE SS_Advertisement (
 --	BillPhone varchar2(10),
 --	BillFax varchar2(10),
 --	BillEmail varchar2(25),
---	dtOrdered date DEFAULT SYSDATE,
---	ShipProvince varchar2(20),
---	ShipCountry varchar2(20),
 --	BillProvince varchar2(20),
 --	BillCountry varchar2(20),
+--	dtOrdered date DEFAULT SYSDATE,
 --	CardType char(1) ,
 --	CardNumber varchar2(20) ,
 --	ExpMonth char(2),
@@ -249,6 +259,8 @@ CREATE TABLE SS_Advertisement (
 --update SS_basket
 -- SET orderplaced = 0
 --where idbasket = 12;
+
+--###########Table 5###########
 --CREATE TABLE SS_basketItem (
 --	idBasketItem number(2),
 --	idAdvertisement number(2),
@@ -320,6 +332,8 @@ CREATE TABLE SS_Advertisement (
 --      values (42, 8, 10.80, 1, 16, 2, 3);
 --insert into SS_basketItem
 --      values (43, 7, 5.40, 1, 16, 1, 3);
+
+--###########Table 6###########
 --CREATE TABLE SS_Shipping (
 --	idRange NUMBER(2),
 --	Low NUMBER(3),
@@ -329,6 +343,8 @@ CREATE TABLE SS_Advertisement (
 --INSERT INTO SS_shipping  VALUES(1,1,5,5.00);
 --INSERT INTO SS_shipping  VALUES(2,6,10,8.00);
 --INSERT INTO SS_shipping  VALUES(3,11,99,11.00);
+
+--###########Table 7###########
 --CREATE TABLE SS_BasketStatus (
 --	idStatus number(5),
 --	idBasket number(5),
@@ -355,26 +371,37 @@ CREATE TABLE SS_Advertisement (
 --  SET shipper = 'UPS', shippingnum = 'ZW845584GD89H569',
 --                  notes = 'Customer called to confirm shipment'
 -- WHERE idstatus = 2;
+
+--###########View 1###########
 --create view SS_basketitem_vu as
 --   select * from SS_basketitem;
+
+--###########Table 8###########
 --create table SS_prod_sales (
 --     idAdvertisement NUMBER(2),
 --     month char(3),
 --     year char(4),
 --     qty number(5),
 --     total number(6,2) );
+
+--###########Table 9###########
 --create table SS_shop_sales (
 --     idshopper NUMBER(4),
 --     total number(6,2) );
 --CREATE SEQUENCE SS_prodreq_seq;
+
+--###########View 2###########
 --CREATE OR REPLACE VIEW SS_ship_vu
 -- AS SELECT b.idbasket, b.shipflag, bs.idstage, bs.dtstage, bs.notes,
 --            bs.shipper, bs.shippingnum
 --      FROM SS_basket b, SS_basketstatus bs
 --      WHERE b.idBasket = bs.idBasket;
+
+--###########Table 10###########
 --CREATE TABLE SS_audit_logon
 --  ( userid VARCHAR2(10),
 --    logdate DATE );
+
 --UPDATE SS_basket
 --  SET shipfirstname='John',shiplastname='Carter',
 --      shipaddress='21 Front St.',shipcity='Raleigh',
