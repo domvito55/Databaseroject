@@ -1,41 +1,53 @@
-DROP VIEW SS_basketitem_vu;
-DROP VIEW SS_ship_vu;
+--DROP VIEW SS_basketitem_vu;
+--DROP VIEW SS_ship_vu;
 DROP TABLE SS_category CASCADE CONSTRAINTS;
 DROP TABLE SS_Advertisement CASCADE CONSTRAINTS;
-DROP TABLE SS_Advertisementoption CASCADE CONSTRAINTS;
-DROP TABLE SS_Advertisementoptiondetail CASCADE CONSTRAINTS;
-DROP TABLE SS_Advertisementoptioncategory CASCADE CONSTRAINTS;
-DROP TABLE SS_basketitem CASCADE CONSTRAINTS;
-DROP TABLE SS_basket CASCADE CONSTRAINTS;
-DROP TABLE SS_shopper CASCADE CONSTRAINTS;
-DROP TABLE SS_basketstatus CASCADE CONSTRAINTS;
-DROP TABLE SS_tax CASCADE CONSTRAINTS;
-DROP TABLE SS_shipping CASCADE CONSTRAINTS;
-DROP TABLE SS_promolist CASCADE CONSTRAINTS;
-DROP TABLE SS_promo CASCADE CONSTRAINTS;
-DROP TABLE SS_test1 CASCADE CONSTRAINTS;
-DROP TABLE SS_test2 CASCADE CONSTRAINTS;
-DROP TABLE SS_prod_sales CASCADE CONSTRAINTS;
-DROP TABLE SS_shop_sales CASCADE CONSTRAINTS;
-DROP TABLE SS_audit_logon CASCADE CONSTRAINTS;
-DROP TABLE SS_Advertisement_request CASCADE CONSTRAINTS;
-DROP TABLE SS_blocktest CASCADE CONSTRAINTS;
-DROP TABLE SS_trans_log CASCADE CONSTRAINTS;
-Drop table SS_audit_logon CASCADE CONSTRAINTS;
+DROP TABLE SS_Shopper CASCADE CONSTRAINTS;
+DROP TABLE SS_Cart CASCADE CONSTRAINTS;
+DROP TABLE SS_CartItem CASCADE CONSTRAINTS;
+DROP TABLE SS_Shipping CASCADE CONSTRAINTS;
+DROP TABLE SS_CartStatus CASCADE CONSTRAINTS;
+DROP TABLE SS_Cat_Sales CASCADE CONSTRAINTS;
+DROP TABLE SS_Shop_Sales CASCADE CONSTRAINTS;
+DROP TABLE SS_Audit_Logon CASCADE CONSTRAINTS;
 
-drop sequence SS_categoryId_seq;
-drop sequence SS_advertisementId_seq;
 
-DROP SEQUENCE SS_adid_seq;
+--DROP TABLE SS_Advertisementoption CASCADE CONSTRAINTS;
+--DROP TABLE SS_Advertisementoptiondetail CASCADE CONSTRAINTS;
+--DROP TABLE SS_Advertisementoptioncategory CASCADE CONSTRAINTS;
+--DROP TABLE SS_basketitem CASCADE CONSTRAINTS;
+--DROP TABLE SS_basket CASCADE CONSTRAINTS;
+--DROP TABLE SS_basketstatus CASCADE CONSTRAINTS;
+--DROP TABLE SS_tax CASCADE CONSTRAINTS;
+--DROP TABLE SS_promolist CASCADE CONSTRAINTS;
+--DROP TABLE SS_promo CASCADE CONSTRAINTS;
+--DROP TABLE SS_test1 CASCADE CONSTRAINTS;
+--DROP TABLE SS_test2 CASCADE CONSTRAINTS;
+--DROP TABLE SS_audit_logon CASCADE CONSTRAINTS;
+--DROP TABLE SS_Advertisement_request CASCADE CONSTRAINTS;
+--DROP TABLE SS_blocktest CASCADE CONSTRAINTS;
+--DROP TABLE SS_trans_log CASCADE CONSTRAINTS;
+
+
+DROP SEQUENCE SS_categoryId_seq;
+DROP SEQUENCE SS_advertisementId_seq;
 DROP SEQUENCE SS_shopper_seq;
-DROP SEQUENCE SS_poption_seq;
-DROP SEQUENCE SS_idbasket_seq;
-DROP SEQUENCE SS_idbasketitem_seq;
-DROP SEQUENCE SS_status_seq;
-DROP SEQUENCE SS_prodreq_seq;
+DROP SEQUENCE SS_CartId_seq;
+DROP SEQUENCE SS_CartItemId_seq;
+DROP SEQUENCE SS_RangeId_seq;
+DROP SEQUENCE SS_Status_seq;
+DROP SEQUENCE SS_Cat_Sales_seq;
+
+--DROP SEQUENCE SS_adid_seq;
+--DROP SEQUENCE SS_poption_seq;
+--DROP SEQUENCE SS_idbasket_seq;
+--DROP SEQUENCE SS_idbasketitem_seq;
+--DROP SEQUENCE SS_status_seq;
+--DROP SEQUENCE SS_prodreq_seq;
+--DROP SEQUENCE SS_cat_sales_seq;
 
 -- ################### Category ####################
-create sequence SS_categoryId_seq;
+CREATE SEQUENCE SS_categoryId_seq;
 --###########Table 1###########
 CREATE TABLE SS_category (
 	categoryId number(2),
@@ -45,28 +57,23 @@ CREATE TABLE SS_category (
 insert into SS_category 
    values(SS_categoryId_seq.nextval,'Art','Painting, Sculpture, and more');
 insert into SS_category 
-   values(SS_categoryId_seq.nextval,'Books','Textbooks, magazines, romances,
-            and more');
+   values(SS_categoryId_seq.nextval,'Books','Textbooks, magazines, romances, and more');
 insert into SS_category 
    values(SS_categoryId_seq.nextval,'Clothes','Shirts, pants, underwear, and more');
---insert into SS_category 
---   values(SS_categoryId_seq.nextval,'Eletronics','Computers, cellphones, and more');
---insert into SS_category 
---   values(SS_categoryId_seq.nextval,'Furniture','Sofas, beds, tables, and more');
---insert into SS_category 
---   values(SS_categoryId_seq.nextval,'Musical Instruments','Guitars, Pianos, Drums,
---           and more');
---insert into SS_category 
---   values(SS_categoryId_seq.nextval,'Real State','Houses, apartments, offices, and
---            more for buy or rent');
---insert into SS_category 
---   values(SS_categoryId_seq.nextval,'Tools','cars, motorcycles, bicycles, and more');
---insert into SS_category 
---   values(SS_categoryId_seq.nextval,'Toys','Board games, dolls, video games 
---            and more');
---insert into SS_category 
---   values(SS_categoryId_seq.nextval,'Vehicles','Cars, motorcycles, bicycles,
---            and more');
+insert into SS_category 
+   values(SS_categoryId_seq.nextval,'Eletronics','Computers, cellphones, and more');
+insert into SS_category 
+   values(SS_categoryId_seq.nextval,'Furniture','Sofas, beds, tables, and more');
+insert into SS_category 
+   values(SS_categoryId_seq.nextval,'Musical Instruments','Guitars, Pianos, Drums, and more');
+insert into SS_category 
+   values(SS_categoryId_seq.nextval,'Real State','Houses, apartments, offices, and more for buy or rent');
+insert into SS_category 
+   values(SS_categoryId_seq.nextval,'Tools','cars, motorcycles, bicycles, and more');
+insert into SS_category 
+   values(SS_categoryId_seq.nextval,'Toys','Board games, dolls, video games, and more');
+insert into SS_category 
+   values(SS_categoryId_seq.nextval,'Vehicles','Cars, motorcycles, bicycles, and more');
 
 -- ################### Advertisement ####################
 CREATE SEQUENCE SS_advertisementId_seq;
@@ -92,41 +99,48 @@ CREATE TABLE SS_Advertisement (
 
 INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
 VALUES (SS_advertisementId_seq.nextval,'Rich Dad Poor Dad','Rich Dad Poor Dad is the #1 personal finance book of all time. 
- Buy today to set yourself up for a wealthy, happy future.',EMPTY_BLOB(), 99.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 89.99, 100, 1);
+ Buy today to set yourself up for a wealthy, happy future.',EMPTY_BLOB(), 99.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 89.99, 100, 2);
 
 INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
-VALUES (SS_advertisementId_seq.nextval,'Tom and Jerry','Cartoon',EMPTY_BLOB(), 99.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 89.99, 100, 1);
+VALUES (SS_advertisementId_seq.nextval,'Nike Air Jordan 1','Own the OG Nike Sneakers in white.',
+EMPTY_BLOB(), 149.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 129.99, 200, 3);
 
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Adidas track pants','Meet your new favorite track pants. These adidas Firebird track pants were made for icons',
+EMPTY_BLOB(), 99.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 89.99, 100, 3);
 
---insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(3,'E','Eileen 4-cup French Press', 'A unique coffeemaker from those proud craftsmen in windy Normandy.', 'frepress.gif', 32.50, 1, 2);
---
---insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(4,'E','Coffee Grinder', 'Avoid blade grinders! This mill grinder allows you to choose a fine grind to a coarse grind.', 'grind.gif', 28.50, 1, 2);
---
---insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(5,'C','Sumatra', 'Spicy and intense with herbal aroma. ', 'sumatra.jpg', 10.50, 1, 1);
---
---insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(6,'C','Guatamala', 'heavy body, spicy twist, aromatic and smokey flavor.', 'Guatamala.jpg', 10.00, 1, 1);
---
---insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(7,'C','Columbia', 'dry, nutty flavor and smoothness', 'columbia.jpg', 10.80, 1, 1);
---
---insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(8,'C','Brazil', 'well-balanced mellow flavor, a medium body with hints of cocoa and a mild, nut-like aftertaste', 'brazil.jpg', 10.80, 1, 1);
---
---insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(9,'C','Ethiopia', 'distinctive berry-like flavor and aroma, reminds many of a fruity, memorable wine. ', 'ethiopia.jpg', 10.00, 1, 1);
---
---insert into SS_Advertisement(idAdvertisement, Type, AdvertisementName, Description, AdvertisementImage, Price, Active, idCategory) 
---  values(10,'C','Espresso', 'dense, caramel-like sweetness with a soft acidity. Roasted somewhat darker than traditional Italian.', 'espresso.jpg', 10.00, 1, 1);
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Airpods 2nd Gen','These airpods are almost as good as new ones. They work perfectly.',
+EMPTY_BLOB(), 59.99, 'N', 'Y', 'N', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 59.99, 1, 4);
 
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Bed Mattress','Used for an year and a half. The mattress is very comfortable and has minimal stains.',
+EMPTY_BLOB(), 39.99, 'N', 'Y', 'N', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 39.99, 2, 5);
+
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Honda Civic 2016','2016 built Honda Civic. Blue color. Used for 109k kms.',
+EMPTY_BLOB(), 9999.99, 'N', 'Y', 'N', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 8889.99, 1, 10);
+
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Barbie doll','New Barbie merchandise from Mattel. Exclusive to Canada.',
+EMPTY_BLOB(), 69.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 69.99, 75, 9);
+
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Drilling Machine','My old drilling machine is up for sale because I do not use it no more.',
+EMPTY_BLOB(), 39.99, 'N', 'Y', 'N', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 35.99, 1, 8);
+
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Electric Guitar','Are you into heavy metal music? You found the right instrument for you.',
+EMPTY_BLOB(), 199.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 189.99, 15, 6);
+
+INSERT INTO SS_Advertisement (advertisementId, advertisementTitle, advertisementDescription, advertisementImage, price, sold, active, new, saleStart, saleEnd, salePrice, stock, idcategory)
+VALUES (SS_advertisementId_seq.nextval,'Sculpture of Prometheus','Sculpture of Prometheus. he gave fire to humans. He was chained and punished for it.',
+EMPTY_BLOB(), 9.99, 'N', 'Y', 'Y', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-15', 'YYYY-MM-DD'), 8.99, 1, 1);
 
 -- ################### SHOPPER ####################
 --###########Table 3###########
 CREATE TABLE SS_Shopper (
-	idShopper number,
+	shopperId number,
 	FirstName varchar2(15),
 	LastName varchar2(20),
 	Address varchar2(40),
@@ -137,49 +151,81 @@ CREATE TABLE SS_Shopper (
 	Phone varchar2(10),
 	Email varchar2(25),
 	UserName varchar2(8),
-	Password varchar2(8),
+	Password varchar2(16),
 	dtEntered date DEFAULT SYSDATE,
-	CONSTRAINT SS_shopper_id_pk PRIMARY KEY(idShopper) );
-
+	CONSTRAINT SS_shopper_id_pk PRIMARY KEY(shopperId) );
 
 create sequence SS_shopper_seq
-  start with 1;
-insert into SS_shopper
-    values (21, 'John', 'Carter', '21 Front St.', 'Raleigh',
-            'NC', 'USA','54822', '9014317701', 'Crackjack@aol.com', 'Crackj',
-            'flyby', '13-JAN-2012');
-insert into SS_shopper
-    values (22, 'Margaret', 'Somner', '287 Walnut Drive', 'Cheasapeake',
-            'VA', 'USA','23321', '7574216559', 'MargS@infi.net', 'MaryS',
-            'pupper', '03-FEB-2012');
---insert into SS_shopper
---    values (23, 'Kenny', 'Ratman', '1 Fun Lane', 'South Park',
---            'NC', 'USA','54674', '9015680902', 'ratboy@msn.net', 'rat55',
---            'kile', '26-JAN-2012');
---insert into SS_shopper
---    values (24, 'Camryn', 'Sonnie', '40162 Talamore', 'South Riding',
---            'VA','20152', '7035556868', NULL, 'kids2@xis.net', 'kids2',
---            'steel', 1, '19-MAR-2012', NULL, 'USA');
---insert into SS_shopper
---    values (25, 'Scott', 'Savid', '11 Pine Grove', 'Hickory',
---            'VA','22954', '7578221010', NULL, 'scott1@odu.edu', 'fdwell',
---            'tweak', 1, '19-FEB-2012', NULL, 'USA');
---insert into SS_shopper
---    values (26, 'Monica', 'Cast', '112 W. 4th', 'Greensburg',
---            'VA','27754', '7573217384', NULL, 'gma@earth.net', 'gma1',
---            'goofy', 1, '09-FEB-2012', NULL, 'USA');
---insert into SS_shopper
---    values (27, 'Pete', 'Parker', '1 Queens', 'New York',
---            'NY','67233', '1013217384', NULL, 'spider@web.net', '',
---            '', 0, '14-FEB-2012', NULL, 'USA');
+  start with 1001;
+
+-- Entry 1
+INSERT INTO SS_shopper
+    values (SS_shopper_seq.nextval, 'John', 'Doe', '21 Front St.', 'Scarborough',
+            'ON', 'Canada','A2H2E2', '9014317701', 'JohnD@aol.com', 'JohnD',
+            'Spotsalescool1', '13-JAN-2023');
+-- Entry 2
+INSERT INTO SS_shopper
+    values (SS_shopper_seq.nextval, 'Maria', 'Somner', '287 Walnut Drive', 'Calgary',
+            'AB', 'Canada','H3K4B2', '7574216559', 'MarS@infi.net', 'MarS',
+            'Mypassword1@', '03-FEB-2023');
+-- Entry 3
+INSERT INTO SS_shopper 
+VALUES (SS_shopper_seq.nextval, 'Michael', 'Smith', '123 Main St.', 'Vancouver',
+        'BC', 'Canada', 'V6C3K9', '6049876543', 'm.smith@example.com', 'miksmith',
+        'P@ssw0rd123', '15-MAR-2023');
+
+-- Entry 4
+INSERT INTO SS_shopper 
+VALUES (SS_shopper_seq.nextval, 'Emily', 'Johnson', '456 Oak Ave.', 'Toronto',
+        'ON', 'Canada', 'M4B2R7', '4167890123', 'emily.j@example.com', 'emilyj',
+        'Qwerty!23', '27-APR-2023');
+
+-- Entry 5
+INSERT INTO SS_shopper 
+VALUES (SS_shopper_seq.nextval, 'David', 'Lee', '789 Elm St.', 'Montreal',
+        'QC', 'Canada', 'H1A3S6', '5142345678', 'davidl@example.com', 'davidlee',
+        'Pa$$word456', '10-MAY-2023');
+
+-- Entry 6
+INSERT INTO SS_shopper 
+VALUES (SS_shopper_seq.nextval, 'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa',
+        'ON', 'Canada', 'K2P1Z8', '6135432198', 's.wilson@example.com', 'sarahw',
+        'MySecr3t!', '22-JUN-2023');
+
+-- Entry 7
+INSERT INTO SS_shopper 
+VALUES (SS_shopper_seq.nextval, 'Andrew', 'Anderson', '111 Cherry St.', 'Edmonton',
+        'AB', 'Canada', 'T5J2S4', '7807654321', 'a.anderson@example.com', 'andrewa',
+        'Pass123$', '05-JUL-2023');
+
+-- Entry 8
+INSERT INTO SS_shopper 
+VALUES (SS_shopper_seq.nextval, 'Olivia', 'Brown', '222 Maple Ave.', 'Winnipeg',
+        'MB', 'Canada', 'R3B1P7', '2048765432', 'olivia.b@example.com', 'oliviab',
+        'P@ssword987', '18-AUG-2023');
+
+-- Entry 9
+INSERT INTO SS_shopper 
+VALUES (SS_shopper_seq.nextval, 'William', 'Taylor', '333 Birch Rd.', 'Quebec City',
+        'QC', 'Canada', 'G1R2V3', '4189876543', 'wtaylor@example.com', 'willt',
+        'Taylored1!', '30-SEP-2023');
+
+-- Entry 10
+INSERT INTO SS_shopper 
+VALUES (SS_shopper_seq.nextval, 'Sophia', 'Martin', '444 Cedar St.', 'Halifax',
+        'NS', 'Canada', 'B3J1R7', '9026543210', 's.martin@example.com', 'sophiam',
+        'M@rtin567', '12-OCT-2023');
+
+
+
 --ALter table SS_shopper
 --  ADD (promo CHAR(1));
 
 --###########Table 4###########
-CREATE TABLE SS_Basket (
-	idBasket number(5),
+CREATE TABLE SS_Cart (
+	CartId number(5),
 	Quantity number(2),
-	idShopper number(4),
+	ShopperId number(4),
 	OrderPlaced number(1),
 	SubTotal number(7,2),
 	Total number(7,2),
@@ -217,39 +263,127 @@ CREATE TABLE SS_Basket (
 	CardName varchar2(25),
         shipbill char(1) default 'N',
         ShipFlag char(1) default 'N',
-        CONSTRAINT SS_bskt_id_pk PRIMARY KEY(idBasket),
-         CONSTRAINT SS_bskt_idshopper_fk FOREIGN KEY (idShopper)
-           REFERENCES SS_Shopper(idShopper) );
-Create sequence SS_idBasket_seq
-   start with 25;
-insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
-    values (3, 3, 21, 1, 26.60, 32.40, 5.00, .80, '23-JAN-2012',0);
-insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
-    values (4, 1, 21, 1, 28.50, 34.36, 5.00, .86, '12-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (5, 4, 22, 1, 41.60, 48.47, 5.00, 1.87, '19-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (6, 3, 22, 1, 149.99, 161.74, 5.00, 6.75, '01-MAR-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (7, 2, 23, 1, 21.60, 27.25, 5.00, .65, '26-JAN-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (8, 2, 23, 1, 21.60, 27.25, 5.00, .65, '16-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (9, 2, 23, 1, 21.60, 27.25, 5.00, .65, '02-MAR-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (10, 3, 24, 1, 38.90, 45.65, 5.00, 1.75, '07-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (11, 1, 24, 1, 10.00, 15.45, 5.00, .45, '27-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (12, 7, 25, 1, 72.40, 83.66, 8.00, 3.26, '19-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (13, 2, 26, 0, 20.00, 0, 0, 0, '09-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (14, 0, 26, 0, 0, 0, 0, 0, '10-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (15, 2, 27, 0, 16.20, 21.69, 5.00, .49, '14-FEB-2012',0);
---insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, total, shipping, tax, dtcreated, promo)
---    values (16, 2, 27, 0, 16.20, 21.69, 5.00, .49, '24-FEB-2012',0);
+        CONSTRAINT SS_cart_id_pk PRIMARY KEY(CartId),
+         CONSTRAINT SS_cart_shopperId_fk FOREIGN KEY (ShopperId)
+           REFERENCES SS_Shopper(ShopperId) );
+           
+CREATE SEQUENCE SS_CartId_seq
+   start with 20;
+
+-- Insert 1
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+                       
+VALUES (SS_CartId_seq.nextval, 2, 1001, 1, 60.00, 50.50, 6.50, 3.00,
+        'John', 'Doe', '21 Front St.', 'Scarborough', 'ON', 'A2H2E2',
+        '9014317701', 'JohnD@aol.com', 'John', 'Doe', '21 Front St.', 'Scarborough',
+        'ON', 'A2H2E2', '9014317701', 'JohnD@aol.com', 'V', '************1234', '12', '2025', 'John Doe');
+
+-- Insert 2
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 1, 1002, 1, 41.00, 34.50, 4.50, 2.00,
+        'Maria', 'Somner', '287 Walnut Drive', 'Calgary', 'AB', 'H3K4B2',
+        '7574216559', 'MarS@infi.net', 'Maria', 'Somner', '287 Walnut Drive', 'Calgary',
+        'AB', 'H3K4B2', '7574216559', 'MarS@infi.net', 'M', '************5678', '09', '2026', 'Maria Somner');
+
+-- Insert 3
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 3, 1003, 0, 299.97, 299.97, 0.00, 0.00,
+        'Michael', 'Smith', '123 Main St.', 'Vancouver', 'BC', 'V6C3K9',
+        '6049876543', 'm.smith@example.com', 'Michael', 'Smith', '123 Main St.', 'Vancouver',
+        'BC', 'V6C3K9', '6049876543', 'm.smith@example.com', 'A', '************9876', '06', '2024', 'Michael Smith');
+
+-- Insert 4
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 2, 1004, 1, 52.40, 45.20, 5.20, 2.00,
+        'Emily', 'Johnson', '456 Oak Ave.', 'Toronto', 'ON', 'M4B2R7',
+        '4167890123', 'emily.j@example.com', 'Emily', 'Johnson', '456 Oak Ave.', 'Toronto',
+        'ON', 'M4B2R7', '4167890123', 'emily.j@example.com', 'V', '************2345', '11', '2025', 'Emily Johnson');
+
+-- Insert 5
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 1, 1005, 0, 20.00, 20.00, 0.00, 0.00,
+        'David', 'Lee', '789 Elm St.', 'Montreal', 'QC', 'H1A3S6',
+        '5142345678', 'davidl@example.com', 'David', 'Lee', '789 Elm St.', 'Montreal',
+        'QC', 'H1A3S6', '5142345678', 'davidl@example.com', 'M', '************4567', '04', '2023', 'David Lee');
+
+-- Insert 6
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 4, 1006, 1, 78.60, 67.80, 7.80, 3.00,
+        'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa', 'ON', 'K2P1Z8',
+        '6135432198', 's.wilson@example.com', 'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa',
+        'ON', 'K2P1Z8', '6135432198', 's.wilson@example.com', 'A', '************7654', '10', '2023', 'Sarah Wilson');
+
+-- Insert 7
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 2, 1010, 1, 92.20, 79.10, 9.10, 4.00,
+        'Sophia', 'Martin', '444 Cedar St.', 'Halifax', 'NS', 'B3J1R7',
+        '9026543210', 's.martin@example.com', 'Sophia', 'Martin', '444 Cedar St.', 'Halifax',
+        'NS', 'B3J1R7', '9026543210', 's.martin@example.com', 'V', '************3210', '02', '2026', 'Sophia Martin');
+
+-- Insert 8
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 1, 1007, 0, 129.99, 129.99, 0.00, 0.00,
+        'Andrew', 'Anderson', '111 Cherry St.', 'Edmonton', 'AB', 'T5J2S4',
+        '7807654321', 'a.anderson@example.com', 'Andrew', 'Anderson', '111 Cherry St.', 'Edmonton',
+        'AB', 'T5J2S4', '7807654321', 'a.anderson@example.com', 'M', '************5432', '07', '2023', 'Andrew Anderson');
+
+-- Insert 9
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 3, 1008, 1, 66.00, 56.50, 6.50, 3.00,
+        'Olivia', 'Brown', '222 Maple Ave.', 'Winnipeg', 'MB', 'R3B1P7',
+        '2048765432', 'olivia.b@example.com', 'Olivia', 'Brown', '222 Maple Ave.', 'Winnipeg',
+        'MB', 'R3B1P7', '2048765432', 'olivia.b@example.com', 'V', '************8765', '08', '2025', 'Olivia Brown');
+
+-- Insert 10
+INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, Shipping, Tax,
+                       ShipFirstName, ShipLastName, ShipAddress, ShipCity, ShipState, ShipZipCode,
+                       ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
+                       BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
+                       ExpYear, CardName)
+VALUES (SS_CartId_seq.nextval, 2, 1006, 0, 99.98, 99.98, 0.00, 0.00,
+        'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa', 'ON', 'K2P1Z8',
+        '6135432198', 's.wilson@example.com', 'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa',
+        'ON', 'K2P1Z8', '6135432198', 's.wilson@example.com', 'A', '************7654', '10', '2023', 'Sarah Wilson');
+
+
+
+
 --update SS_basket
 -- set dtordered = dtcreated;
 --update SS_basket
@@ -262,146 +396,338 @@ insert into SS_basket (idbasket, quantity, idshopper,orderplaced, subtotal, tota
 --where idbasket = 12;
 
 --###########Table 5###########
-CREATE TABLE SS_basketItem (
-	idBasketItem number(2),
-	idAdvertisement number(2),
+CREATE TABLE SS_CartItem (
+	CartItemId number(2),
+	AdvertisementId number(2),
 	Price number(6,2),
 	Quantity number(2),
-	idBasket number(5) ,
+	CartId number(5) ,
 	option1 number(2),
 	option2 number(2),
-	CONSTRAINT SS_bsktitem_id_pk PRIMARY KEY (idBasketItem),
-        CONSTRAINT SS_bsktitem_bsktid_fk FOREIGN KEY (idBasket) 
-          REFERENCES SS_Basket(idBasket),
-        CONSTRAINT SS_bsktitem_idprod_fk FOREIGN KEY (idAdvertisement) 
-          REFERENCES SS_Advertisement(Advertisementid) );
-Create sequence SS_idBasketitem_seq
+	CONSTRAINT SS_CartItem_id_pk PRIMARY KEY (CartItemId),
+        CONSTRAINT SS_CartItem_CartId_fk FOREIGN KEY (CartId) 
+          REFERENCES SS_Cart(CartId),
+        CONSTRAINT SS_CartItem_idprod_fk FOREIGN KEY (AdvertisementId) 
+          REFERENCES SS_Advertisement(AdvertisementId) );
+          
+CREATE SEQUENCE SS_CartItemId_seq
   start with 50;
-insert into SS_basketItem
-      values (15, 1, 5.00, 1, 3, 1, 4);
-insert into SS_basketItem
-      values (16, 2, 10.80, 2, 3, 2, 4);
---insert into SS_basketItem
---      values (17, 4, 28.50, 1, 4, NULL, NULL);
---insert into SS_basketItem
---      values (18, 7, 10.80, 1, 5, 2, 3);
---insert into SS_basketItem
---      values (19, 8, 10.80, 1, 5, 2, 3);
---insert into SS_basketItem
---      values (20, 9, 10.00, 1, 5, 2, 3);
---insert into SS_basketItem
---      values (21, 10, 10.00, 1, 5, 2, 3);
---insert into SS_basketItem
---      values (22, 10, 10.00, 2, 6, 2, 4);
---insert into SS_basketItem
---      values (23, 2, 129.99, 1, 6, NULL, NULL);
---insert into SS_basketItem
---      values (24, 7, 10.80, 1, 7, 2, 3);
---insert into SS_basketItem
---      values (25, 8, 10.80, 1, 7, 2, 3);
---insert into SS_basketItem
---      values (26, 7, 10.80, 1, 8, 2, 3);
---insert into SS_basketItem
---      values (27, 8, 10.80, 1, 8, 2, 3);
---insert into SS_basketItem
---      values (28, 7, 10.80, 1, 9, 2, 3);
---insert into SS_basketItem
---      values (29, 8, 10.80, 1, 9, 2, 3);
---insert into SS_basketItem
---      values (30, 6, 5.00,  1, 10, 1, 3);
---insert into SS_basketItem
---      values (31, 8, 5.40,  1, 10, 1, 3);
---insert into SS_basketItem
---      values (32, 4, 28.50, 1, 10, NULL, NULL);
---insert into SS_basketItem
---      values (33, 9, 10.00, 1, 11, 2, 3);
---insert into SS_basketItem
---      values (34, 8, 10.80, 2, 12, 2, 3);
---insert into SS_basketItem
---      values (35, 9, 10.00, 2, 12, 2, 3);
---insert into SS_basketItem
---      values (36, 6, 10.00, 2, 12, 2, 3);
---insert into SS_basketItem
---      values (37, 7, 10.80, 1, 12, 2, 3);
---insert into SS_basketItem
---      values (38, 9, 10.00, 2, 13, 2, 3);
---insert into SS_basketItem
---      values (40, 8, 10.80, 1, 15, 2, 3);
---insert into SS_basketItem
---      values (41, 7, 5.40, 1, 15, 1, 3);
---insert into SS_basketItem
---      values (42, 8, 10.80, 1, 16, 2, 3);
---insert into SS_basketItem
---      values (43, 7, 5.40, 1, 16, 1, 3);
+
+-- Insert 1
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 1, 25.50, 2, 25, 1, NULL);
+
+-- Insert 2
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 2, 15.75, 1, 25, 2, NULL);
+
+-- Insert 3
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 3, 50.00, 3, 26, 1, NULL);
+
+-- Insert 4
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4, 12.25, 2, 26, 2, NULL);
+
+-- Insert 5
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 5, 18.99, 1, 27, 1, NULL);
+
+-- Insert 6
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 6, 5.50, 4, 27, 3, NULL);
+
+-- Insert 7
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 7, 10.00, 1, 28, 1, NULL);
+
+-- Insert 8
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 8, 7.99, 2, 28, 2, NULL);
+
+-- Insert 9
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 9, 30.75, 3, 29, 1, 1);
+
+-- Insert 10
+INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
+VALUES (SS_CartItemId_seq.NEXTVAL, 10, 9.49, 1, 29, 2, NULL);
+
 
 --###########Table 6###########
 CREATE TABLE SS_Shipping (
-idRange NUMBER(2),
+    RangeId NUMBER(3),
 	Low NUMBER(3),
 	High NUMBER(3),
 	Fee NUMBER(6,2),
-	CONSTRAINT SS_ship_idrange_pk PRIMARY KEY (idRange) ); 
-INSERT INTO SS_shipping  VALUES(1,1,5,5.00);
-INSERT INTO SS_shipping  VALUES(2,6,10,8.00);
-INSERT INTO SS_shipping  VALUES(3,11,99,11.00);
+	CONSTRAINT SS_ship_idrange_pk PRIMARY KEY (RangeId) ); 
+
+CREATE SEQUENCE SS_RangeId_seq
+  start with 101;
+    
+-- Insert 1
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 0, 50, 5.99);
+
+-- Insert 2
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 51, 100, 8.99);
+
+-- Insert 3
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 101, 150, 10.99);
+
+-- Insert 4
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 151, 200, 12.99);
+
+-- Insert 5
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 201, 250, 15.99);
+
+-- Insert 6
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 251, 300, 18.99);
+
+-- Insert 7
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 301, 350, 21.99);
+
+-- Insert 8
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 351, 400, 24.99);
+
+-- Insert 9
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 401, 450, 27.99);
+
+-- Insert 10
+INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
+VALUES (SS_RangeId_seq.nextval, 451, 500, 29.99);
+
 
 --###########Table 7###########
-CREATE TABLE SS_BasketStatus (
-	idStatus number(5),
-	idBasket number(5),
-	idStage number(1),
+CREATE TABLE SS_CartStatus (
+	StatusId number(5),
+	CartId number(5),
+	StageId number(1),
 	dtStage date,
 	Notes varchar2(50),
         shipper varchar2(5),
 	ShippingNum varchar2(20),
-	CONSTRAINT  SS_basketstatus_pk PRIMARY KEY (idStatus),
-        CONSTRAINT SS_BasketStatus_idBasket_fk FOREIGN KEY (idBasket)
-          REFERENCES SS_basket(idBasket) );
-CREATE SEQUENCE SS_status_seq start with 15;
-INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
-     VALUES (1,3,1,'24-JAN-2012');
-INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
-     VALUES (2,3,5,'25-JAN-2012');
-INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
-     VALUES (3,4,1,'13-FEB-2012');
---INSERT INTO SS_basketstatus (idstatus, idbasket, idstage, dtstage)
---     VALUES (4,4,5,'14-FEB-2012');
---INSERT INTO SS_basketstatus
---   VALUES (SS_status_seq.NEXTVAL, 12, 3, NULL, NULL, NULL, NULL);
+	CONSTRAINT  SS_CartStatus_pk PRIMARY KEY (StatusId),
+        CONSTRAINT SS_CartStatus_CartId_fk FOREIGN KEY (CartId)
+          REFERENCES SS_Cart(CartId) );
+          
+CREATE SEQUENCE SS_status_seq start with 11;
+
+-- Insert 1
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 20, 1, SYSDATE, 'Order placed', 'UPS', 'UPSNY12345');
+
+-- Insert 2
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 21, 1, SYSDATE, 'Order placed', 'FedEx', 'FEDEXCA67890');
+
+-- Insert 3
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 22, 0, SYSDATE, 'Order not placed', null, null);
+
+-- Insert 4
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 23, 1, SYSDATE, 'Order placed', 'USPS', 'USPSUS23456');
+
+-- Insert 5
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 24, 0, SYSDATE, 'Order not placed', null, null);
+
+-- Insert 6
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 25, 1, SYSDATE, 'Order placed', 'FedEx', 'FEDEXCA01234');
+
+-- Insert 7
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 26, 1, SYSDATE, 'Order placed', 'DHL', 'DHLGER56789');
+
+-- Insert 8
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 27, 0, SYSDATE, 'Order not placed', null, null);
+
+-- Insert 9
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 28, 1, SYSDATE, 'Order placed', 'UPS', 'UPSNY89012');
+
+-- Insert 10
+INSERT INTO SS_CartStatus (StatusId, CartId, StageId, dtStage, Notes, shipper, ShippingNum)
+VALUES (SS_status_seq.NEXTVAL, 29, 0, SYSDATE, 'Order not placed', null, null);
+
+
+
 --update SS_basketstatus
 --  SET shipper = 'UPS', shippingnum = 'ZW845584GD89H569',
 --                  notes = 'Customer called to confirm shipment'
 -- WHERE idstatus = 2;
 
---###########View 1###########
-create view SS_basketitem_vu as
-   select * from SS_basketitem;
 
 --###########Table 8###########
-create table SS_prod_sales (
-     idAdvertisement NUMBER(2),
-     month char(3),
-     year char(4),
+CREATE TABLE SS_cat_sales (
+    CatSalesId NUMBER(2),
+     AdvertisementId NUMBER(2),
+     month varchar2(3),
+     year varchar2(4),
      qty number(5),
-     total number(6,2) );
+     total number(6,2),
+     CONSTRAINT  SS_cat_sales_pk PRIMARY KEY (CatSalesId),
+     CONSTRAINT SS_cat_sales_idAd_fk FOREIGN KEY (AdvertisementId)
+          REFERENCES SS_Advertisement(AdvertisementId) );
+          
+CREATE SEQUENCE SS_cat_sales_seq start with 1;
+
+-- Insert 1
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 1, 'Jan', '2023', 100, 2500.00);
+
+-- Insert 2
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 2, 'Jan', '2023', 75, 1500.00);
+
+-- Insert 3
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 3, 'Jan', '2023', 50, 1000.00);
+
+-- Insert 4
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 4, 'Jan', '2023', 200, 4000.00);
+
+-- Insert 5
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 5, 'Jan', '2023', 150, 3000.00);
+
+-- Insert 6
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 6, 'Jan', '2023', 80, 2000.00);
+
+-- Insert 7
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 7, 'Jan', '2023', 120, 3000.00);
+
+-- Insert 8
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 8, 'Jan', '2023', 60, 1500.00);
+
+-- Insert 9
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 9, 'Jan', '2023', 100, 2500.00);
+
+-- Insert 10
+INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL, 10, 'Jan', '2023', 50, 1250.00);
+
 
 --###########Table 9###########
-create table SS_shop_sales (
-     idshopper NUMBER(4),
-     total number(6,2) );
-CREATE SEQUENCE SS_prodreq_seq;
+CREATE TABLE SS_shop_sales (
+     ShopperId NUMBER(4),
+     total number(6,2),
+     CONSTRAINT SS_shop_sales_idShopper_fk FOREIGN KEY (ShopperId)
+          REFERENCES SS_Shopper(ShopperId) );
+--CREATE SEQUENCE SS_prodreq_seq;
 
---###########View 2###########
-CREATE OR REPLACE VIEW SS_ship_vu
- AS SELECT b.idbasket, b.shipflag, bs.idstage, bs.dtstage, bs.notes,
-            bs.shipper, bs.shippingnum
-      FROM SS_basket b, SS_basketstatus bs
-      WHERE b.idBasket = bs.idBasket;
+-- Insert 1
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1001, 500.00);
+
+-- Insert 2
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1002, 300.00);
+
+-- Insert 3
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1003, 150.00);
+
+-- Insert 4
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1004, 800.00);
+
+-- Insert 5
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1005, 600.00);
+
+-- Insert 6
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1006, 250.00);
+
+-- Insert 7
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1007, 350.00);
+
+-- Insert 8
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1008, 180.00);
+
+-- Insert 9
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1009, 400.00);
+
+-- Insert 10
+INSERT INTO SS_shop_sales (ShopperId, total)
+VALUES (1010, 200.00);
+
+
 
 --###########Table 10###########
 CREATE TABLE SS_audit_logon
   ( userid VARCHAR2(10),
     logdate DATE );
+---- Insert 1
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user1', TO_DATE('2023-01-01', 'YYYY-MM-DD'));
+--
+---- Insert 2
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user2', TO_DATE('2023-02-05', 'YYYY-MM-DD'));
+--
+---- Insert 3
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user3', TO_DATE('2023-03-12', 'YYYY-MM-DD'));
+--
+---- Insert 4
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user4', TO_DATE('2023-04-20', 'YYYY-MM-DD'));
+--
+---- Insert 5
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user5', TO_DATE('2023-05-17', 'YYYY-MM-DD'));
+--
+---- Insert 6
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user6', TO_DATE('2023-06-11', 'YYYY-MM-DD'));
+--
+---- Insert 7
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user7', TO_DATE('2023-07-28', 'YYYY-MM-DD'));
+--
+---- Insert 8
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user8', TO_DATE('2023-08-09', 'YYYY-MM-DD'));
+--
+---- Insert 9
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user9', TO_DATE('2023-09-14', 'YYYY-MM-DD'));
+--
+---- Insert 10
+--INSERT INTO SS_audit_logon (userid, logdate)
+--VALUES ('user10', TO_DATE('2023-10-30', 'YYYY-MM-DD'));
+
+    
+--###########View 1###########
+--create view SS_basketitem_vu as
+--   select * from SS_basketitem;
+----###########View 2###########
+--CREATE OR REPLACE VIEW SS_ship_vu
+-- AS SELECT b.idbasket, b.shipflag, bs.idstage, bs.dtstage, bs.notes,
+--            bs.shipper, bs.shippingnum
+--      FROM SS_basket b, SS_basketstatus bs
+--      WHERE b.idBasket = bs.idBasket;
 
 --UPDATE SS_basket
 --  SET shipfirstname='John',shiplastname='Carter',
