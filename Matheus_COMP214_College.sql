@@ -197,7 +197,7 @@ CREATE TABLE SS_Cart (
 	SubTotal number(7,2),
 	Total number(7,2),
 	Shipping number(5,2),
-	Tax number(5,2),
+	Tax number(6,2),
 	dtCreated date DEFAULT SYSDATE,
 	Promo number(2),
 	ShipFirstName varchar2(10),
@@ -241,7 +241,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
                        
-VALUES (SS_CartId_seq.nextval, 2, 3001, 1, 60.00, 50.50, 6.50, 3.00,
+VALUES (SS_CartId_seq.nextval,1,3001,1,100,123.17,9,14.17,
         'John', 'Doe', '21 Front St.', 'Scarborough', 'ON', 'A2H2E2',
         '9014317701', 'JohnD@aol.com', 'John', 'Doe', '21 Front St.', 'Scarborough',
         'ON', 'A2H2E2', '9014317701', 'JohnD@aol.com', 'V', '************1234', '12', '2025', 'John Doe');
@@ -252,7 +252,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 1, 3002, 1, 41.00, 34.50, 4.50, 2.00,
+VALUES (SS_CartId_seq.nextval,2,3002,1,250,300.58,16,34.58,
         'Maria', 'Somner', '287 Walnut Drive', 'Calgary', 'AB', 'H3K4B2',
         '7574216559', 'MarS@infi.net', 'Maria', 'Somner', '287 Walnut Drive', 'Calgary',
         'AB', 'H3K4B2', '7574216559', 'MarS@infi.net', 'M', '************5678', '09', '2026', 'Maria Somner');
@@ -263,7 +263,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 3, 3003, 0, 299.97, 299.97, 0.00, 0.00,
+VALUES (SS_CartId_seq.nextval,1,3003,0,100,123.17,9,14.17,
         'Michael', 'Smith', '123 Main St.', 'Vancouver', 'BC', 'V6C3K9',
         '6049876543', 'm.smith@example.com', 'Michael', 'Smith', '123 Main St.', 'Vancouver',
         'BC', 'V6C3K9', '6049876543', 'm.smith@example.com', 'A', '************9876', '06', '2024', 'Michael Smith');
@@ -274,7 +274,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 2, 3004, 1, 52.40, 45.20, 5.20, 2.00,
+VALUES (SS_CartId_seq.nextval,2,3004,1,120,148.03,11,17.03,
         'Emily', 'Johnson', '456 Oak Ave.', 'Toronto', 'ON', 'M4B2R7',
         '4167890123', 'emily.j@example.com', 'Emily', 'Johnson', '456 Oak Ave.', 'Toronto',
         'ON', 'M4B2R7', '4167890123', 'emily.j@example.com', 'V', '************2345', '11', '2025', 'Emily Johnson');
@@ -285,7 +285,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 1, 3005, 0, 20.00, 20.00, 0.00, 0.00,
+VALUES (SS_CartId_seq.nextval,1,3005,0,40,51.98,6,5.98,
         'David', 'Lee', '789 Elm St.', 'Montreal', 'QC', 'H1A3S6',
         '5142345678', 'davidl@example.com', 'David', 'Lee', '789 Elm St.', 'Montreal',
         'QC', 'H1A3S6', '5142345678', 'davidl@example.com', 'M', '************4567', '04', '2023', 'David Lee');
@@ -296,7 +296,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 4, 3006, 1, 78.60, 67.80, 7.80, 3.00,
+VALUES (SS_CartId_seq.nextval,1,3006,1,10000,11333.9,30,1303.9,
         'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa', 'ON', 'K2P1Z8',
         '6135432198', 's.wilson@example.com', 'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa',
         'ON', 'K2P1Z8', '6135432198', 's.wilson@example.com', 'A', '************7654', '10', '2023', 'Sarah Wilson');
@@ -307,7 +307,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 2, 3007, 1, 92.20, 79.10, 9.10, 4.00,
+VALUES (SS_CartId_seq.nextval,1,3007,1,70,89.27,9,10.27,
         'Sophia', 'Martin', '444 Cedar St.', 'Halifax', 'NS', 'B3J1R7',
         '9026543210', 's.martin@example.com', 'Sophia', 'Martin', '444 Cedar St.', 'Halifax',
         'NS', 'B3J1R7', '9026543210', 's.martin@example.com', 'V', '************3210', '02', '2026', 'Sophia Martin');
@@ -318,7 +318,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 1, 3008, 0, 129.99, 129.99, 0.00, 0.00,
+VALUES (SS_CartId_seq.nextval,1,3008,0,40,51.98,6,5.98,
         'Andrew', 'Anderson', '111 Cherry St.', 'Edmonton', 'AB', 'T5J2S4',
         '7807654321', 'a.anderson@example.com', 'Andrew', 'Anderson', '111 Cherry St.', 'Edmonton',
         'AB', 'T5J2S4', '7807654321', 'a.anderson@example.com', 'M', '************5432', '07', '2023', 'Andrew Anderson');
@@ -329,7 +329,7 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 3, 3009, 1, 66.00, 56.50, 6.50, 3.00,
+VALUES (SS_CartId_seq.nextval,1,3009,1,200,240.69,13,27.69,
         'Olivia', 'Brown', '222 Maple Ave.', 'Winnipeg', 'MB', 'R3B1P7',
         '2048765432', 'olivia.b@example.com', 'Olivia', 'Brown', '222 Maple Ave.', 'Winnipeg',
         'MB', 'R3B1P7', '2048765432', 'olivia.b@example.com', 'V', '************8765', '08', '2025', 'Olivia Brown');
@@ -340,70 +340,69 @@ INSERT INTO SS_Cart (CartId, Quantity, shopperId, OrderPlaced, SubTotal, Total, 
                        ShipPhone, ShipEmail, BillFirstName, BillLastName, BillAddress, BillCity,
                        BillState, BillZipCode, BillPhone, BillEmail, CardType, CardNumber, ExpMonth,
                        ExpYear, CardName)
-VALUES (SS_CartId_seq.nextval, 2, 3006, 0, 99.98, 99.98, 0.00, 0.00,
+VALUES (SS_CartId_seq.nextval,1,3006,0,10,18.08,6,2.08,
         'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa', 'ON', 'K2P1Z8',
         '6135432198', 's.wilson@example.com', 'Sarah', 'Wilson', '987 Pine Ave.', 'Ottawa',
         'ON', 'K2P1Z8', '6135432198', 's.wilson@example.com', 'A', '************7654', '10', '2023', 'Sarah Wilson');
-
-select * from SS_cart;
 
 --########### CartItem ###########
 CREATE SEQUENCE SS_CartItemId_seq start with 5001;
 --###########Table 5###########
 CREATE TABLE SS_CartItem (
-	CartItemId number(4),
+	CartId number(4),
 	AdvertisementId number(4),
-	Price number(6,2),
-	Quantity number(2),
-	CartId number(5) ,
-	option1 number(2),
-	option2 number(2),
-	CONSTRAINT SS_CartItem_id_pk PRIMARY KEY (CartItemId),
-        CONSTRAINT SS_CartItem_CartId_fk FOREIGN KEY (CartId) 
-          REFERENCES SS_Cart(CartId),
-        CONSTRAINT SS_CartItem_idprod_fk FOREIGN KEY (AdvertisementId) 
-          REFERENCES SS_Advertisement(AdvertisementId) );
+    CONSTRAINT SS_CartItem_CartId_fk FOREIGN KEY (CartId) 
+      REFERENCES SS_Cart(CartId),
+    CONSTRAINT SS_CartItem_idprod_fk FOREIGN KEY (AdvertisementId) 
+      REFERENCES SS_Advertisement(AdvertisementId) );
 
 -- Insert 1
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2001, 25.50, 2, 4005, 1, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4001,2001);
 
 -- Insert 2
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2002, 15.75, 1, 4005, 2, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4002,2002);
 
 -- Insert 3
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2003, 50.00, 3, 4006, 1, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4002,2003);
 
 -- Insert 4
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2004, 12.25, 2, 4006, 2, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4003,2003);
 
 -- Insert 5
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2005, 18.99, 1, 4007, 1, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4004,2004);
 
 -- Insert 6
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2006, 5.50, 4, 4007, 3, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4004,2004);
 
 -- Insert 7
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2007, 10.00, 1, 4008, 1, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4005,2005);
 
 -- Insert 8
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2008, 7.99, 2, 4008, 2, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4006,2006);
 
 -- Insert 9
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2009, 30.75, 3, 4009, 1, 1);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4007,2007);
 
 -- Insert 10
-INSERT INTO SS_CartItem (CartItemId, AdvertisementId, Price, Quantity, CartId, option1, option2)
-VALUES (SS_CartItemId_seq.NEXTVAL, 2010, 9.49, 1, 4009, 2, NULL);
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4008,2008);
 
+-- Insert 11
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4009,2009);
+
+-- Insert 12
+INSERT INTO SS_CartItem (CartId, AdvertisementId)
+VALUES (4010,2010);
 
 --########### Shipping ###########
 CREATE SEQUENCE SS_RangeId_seq start with 6001;
@@ -417,43 +416,43 @@ CREATE TABLE SS_Shipping (
 
 -- Insert 1
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 0, 50, 5.99);
+VALUES (SS_RangeId_seq.nextval, 0, 50, 6);
 
 -- Insert 2
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 51, 100, 8.99);
+VALUES (SS_RangeId_seq.nextval, 51, 100, 9);
 
 -- Insert 3
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 101, 150, 10.99);
+VALUES (SS_RangeId_seq.nextval, 101, 150, 11);
 
 -- Insert 4
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 151, 200, 12.99);
+VALUES (SS_RangeId_seq.nextval, 151, 200, 13);
 
 -- Insert 5
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 201, 250, 15.99);
+VALUES (SS_RangeId_seq.nextval, 201, 250, 16);
 
 -- Insert 6
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 251, 300, 18.99);
+VALUES (SS_RangeId_seq.nextval, 251, 300, 19);
 
 -- Insert 7
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 301, 350, 21.99);
+VALUES (SS_RangeId_seq.nextval, 301, 350, 22);
 
 -- Insert 8
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 351, 400, 24.99);
+VALUES (SS_RangeId_seq.nextval, 351, 400, 25);
 
 -- Insert 9
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 401, 450, 27.99);
+VALUES (SS_RangeId_seq.nextval, 401, 450, 28);
 
 -- Insert 10
 INSERT INTO SS_Shipping (RangeId, Low, High, Fee)
-VALUES (SS_RangeId_seq.nextval, 451, 500, 29.99);
+VALUES (SS_RangeId_seq.nextval, 451, 500, 30);
 
 
 --########### CartStatus ###########
@@ -516,55 +515,51 @@ VALUES (SS_status_seq.NEXTVAL, 4010, 0, SYSDATE, 'Order not placed', null, null)
 CREATE SEQUENCE SS_cat_sales_seq start with 8001;
 --###########Table 8###########
 CREATE TABLE SS_cat_sales (
-    CatSalesId NUMBER(4),
-     AdvertisementId NUMBER(4),
-     month varchar2(3),
-     year varchar2(4),
-     qty number(5),
-     total number(6,2),
+    CatSalesId NUMBER(6),
+     CategoryId NUMBER(6),
+     month varchar2(6) DEFAULT 'AUG',
+     year varchar2(6) DEFAULT '2023',
+     qty number(6),
+     total number(10,2),
      CONSTRAINT  SS_cat_sales_pk PRIMARY KEY (CatSalesId),
-     CONSTRAINT SS_cat_sales_idAd_fk FOREIGN KEY (AdvertisementId)
-          REFERENCES SS_Advertisement(AdvertisementId) );
+     CONSTRAINT SS_cat_sales_CategoryId_fk FOREIGN KEY (CategoryId)
+          REFERENCES SS_Category(CategoryId) );
 
 -- Insert 1
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2001, 'Jan', '2023', 100, 2500.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1001,1,10);
 
 -- Insert 2
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2002, 'Jan', '2023', 75, 1500.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1002,1,100);
 
 -- Insert 3
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2003, 'Jan', '2023', 50, 1000.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1003,3,350);
 
 -- Insert 4
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2004, 'Jan', '2023', 200, 4000.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1004,2,120);
 
 -- Insert 5
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2005, 'Jan', '2023', 150, 3000.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1005,1,40);
 
 -- Insert 6
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2006, 'Jan', '2023', 80, 2000.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1006,1,200);
 
 -- Insert 7
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2007, 'Jan', '2023', 120, 3000.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1008,1,40);
 
 -- Insert 8
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2008, 'Jan', '2023', 60, 1500.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1009,1,70);
 
 -- Insert 9
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2009, 'Jan', '2023', 100, 2500.00);
-
--- Insert 10
-INSERT INTO SS_cat_sales (CatSalesId, AdvertisementId, month, year, qty, total)
-VALUES (SS_cat_sales_seq.NEXTVAL, 2010, 'Jan', '2023', 50, 1250.00);
+INSERT INTO SS_cat_sales (CatSalesId, CategoryId, qty, total)
+VALUES (SS_cat_sales_seq.NEXTVAL,1010,1,10000);
 
 --########### ShopSales ###########
 --###########Table 9###########
