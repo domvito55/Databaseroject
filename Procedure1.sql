@@ -1,3 +1,5 @@
+-- Procedure to add product in a cartitem table
+-- When a qty changes in the cartitem table a trigger updates the cart table
 CREATE OR REPLACE PROCEDURE SS_AddToCart (
     p_shopperId IN NUMBER,
     p_advertisementId IN NUMBER,
@@ -9,7 +11,7 @@ BEGIN
     -- Check if the shopper has an active cart
     SELECT CartId INTO v_cartId
     FROM SS_Cart
-    WHERE ShopperId = p_shopperId AND OrderPlaced = 0;
+    WHERE (ShopperId = p_shopperId) AND (OrderPlaced = 0);
     dbms_output.put_line(v_cartId);
     IF v_cartId IS NULL THEN
         -- If no active cart, create a new one
@@ -18,7 +20,7 @@ BEGIN
 
         SELECT CartId INTO v_cartId
         FROM SS_Cart
-        WHERE ShopperId = p_shopperId AND OrderPlaced = 0;
+        WHERE (ShopperId = p_shopperId) AND (OrderPlaced = 0);
     END IF;
 
     -- Check if the item is already in the cart
@@ -27,23 +29,27 @@ BEGIN
     WHERE AdvertisementId = p_advertisementId;
 
     IF v_price IS NULL THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Invalid advertisementId. Item not found.');
+        RAISE_APPLICATION_ERROR(-20002, 'Cart is empty or does not exist.');
     END IF;
+    dbms_output.put_line(v_price);
 
     UPDATE SS_CartItem
-    SET Quantity = Quantity + p_quantity
-    WHERE CartId = v_cartId AND AdvertisementId = p_advertisementId;
-
+    SET Quantity = (Quantity + p_quantity), Price = (Price + v_price*p_quantity)
+    WHERE (CartId = v_cartId) AND (AdvertisementId = p_advertisementId);
+    
     IF SQL%NOTFOUND THEN
         -- If the item is not in the cart, insert a new entry
-        INSERT INTO SS_CartItem (CartId, AdvertisementId, Quantity)
-        VALUES (v_cartId, p_advertisementId, p_quantity);
+        INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+        VALUES (SS_CartItemId_seq.NEXTVAL, v_cartId, p_advertisementId, p_quantity, v_price);
     END IF;
 END;
 /
 
 
 -- Test valid data
-EXEC SS_AddToCart(p_shopperId => 3005, p_advertisementId => 2001, p_quantity => 2);
+EXEC SS_AddToCart(p_shopperId => 3005, p_advertisementId => 2001, p_quantity => 3);
 
 select * from SS_CartItem;
+
+select * from SS_Cart;
+

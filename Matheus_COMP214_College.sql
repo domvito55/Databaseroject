@@ -349,60 +349,60 @@ VALUES (SS_CartId_seq.nextval,1,3006,0,10,18.08,6,2.08,
 CREATE SEQUENCE SS_CartItemId_seq start with 5001;
 --###########Table 5###########
 CREATE TABLE SS_CartItem (
+	idCartItem number(4),
 	CartId number(4),
 	AdvertisementId number(4),
+	Quantity number(2),
+	Price number(7,2),
+	CONSTRAINT cartitem_id_pk PRIMARY KEY (idCartItem),
     CONSTRAINT SS_CartItem_CartId_fk FOREIGN KEY (CartId) 
       REFERENCES SS_Cart(CartId),
     CONSTRAINT SS_CartItem_idprod_fk FOREIGN KEY (AdvertisementId) 
       REFERENCES SS_Advertisement(AdvertisementId) );
 
 -- Insert 1
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4001,2001);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4001, 2001, 1, 100);
 
 -- Insert 2
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4002,2002);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4002, 2002, 1, 150);
 
 -- Insert 3
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4002,2003);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4002, 2003, 1, 100);
 
 -- Insert 4
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4003,2003);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4003, 2003, 1, 100);
 
 -- Insert 5
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4004,2004);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4004, 2004, 2, 60);
 
 -- Insert 6
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4004,2004);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4005, 2005, 1, 40);
 
 -- Insert 7
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4005,2005);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4006, 2006, 1, 10000);
 
 -- Insert 8
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4006,2006);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4007, 2007, 1, 70);
 
 -- Insert 9
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4007,2007);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4008, 2008, 1, 40);
 
 -- Insert 10
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4008,2008);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL, 4009, 2009, 1, 200);
 
 -- Insert 11
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4009,2009);
-
--- Insert 12
-INSERT INTO SS_CartItem (CartId, AdvertisementId)
-VALUES (4010,2010);
+INSERT INTO SS_CartItem (idCartItem, CartId, AdvertisementId, Quantity, Price)
+VALUES (SS_CartItemId_seq.NEXTVAL,4010,2010,1,10);
 
 --########### Shipping ###########
 CREATE SEQUENCE SS_RangeId_seq start with 6001;

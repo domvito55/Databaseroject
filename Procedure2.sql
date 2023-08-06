@@ -29,10 +29,6 @@ BEGIN
 END;
 /
 
-
-
-
-
 -- Test valid data
 DECLARE
     v_shippingFee NUMBER;
