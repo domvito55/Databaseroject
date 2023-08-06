@@ -6,6 +6,7 @@ BEGIN
   UPDATE ss_cart
    SET quantity = quantity + :NEW.quantity,
      subtotal = subtotal + :NEW.price,
+     shipping = ss_shipcost(subtotal + :NEW.price),
      total = total + :NEW.price + :NEW.price * 0.13,
      tax = tax + :NEW.price * 0.13
     WHERE cartid = :NEW.cartid;
@@ -13,6 +14,7 @@ BEGIN
   UPDATE ss_cart
    SET quantity = quantity - :OLD.quantity,
      subtotal = subtotal - :OLD.price,
+     shipping = ss_shipcost(subtotal - :OLD.price),
      total = total - :OLD.price - :OLD.price * 0.13,
      tax = tax - :OLD.price * 0.13
     WHERE cartid = :OLD.cartid;
@@ -20,6 +22,7 @@ BEGIN
   UPDATE ss_cart
    SET quantity = quantity + (:NEW.quantity - :OLD.quantity),
      subtotal = subtotal + (:NEW.price - :OLD.price),
+     shipping = ss_shipcost(subtotal + (:NEW.price - :OLD.price)),
      total = total  + (:NEW.price - :OLD.price) * 1.13,
      tax = tax  + (:NEW.price - :OLD.price) * 0.13
     WHERE cartid = :NEW.cartid;

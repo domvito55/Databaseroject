@@ -1,6 +1,6 @@
-CREATE OR REPLACE PROCEDURE SS_CalculateCartTotal (
-    p_shopperId IN NUMBER,
-    p_cartId IN NUMBER,
+CREATE OR REPLACE PROCEDURE SS_ShipCost (
+    p_qty IN NUMBER,
+    p_ship IN NUMBER,
     p_shippingFee OUT NUMBER,
     p_taxAmount OUT NUMBER,
     p_totalAmount OUT NUMBER
@@ -40,3 +40,5 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Tax Amount: ' || v_taxAmount);
     DBMS_OUTPUT.PUT_LINE('Total Amount: ' || v_totalAmount);
 END;
+/
+select * from ss_cart;
