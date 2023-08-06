@@ -614,66 +614,9 @@ VALUES (3010, 200.00);
 CREATE TABLE SS_audit_logon
   ( userid VARCHAR2(10),
     logdate DATE );
----- Insert 1
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user1', TO_DATE('2023-01-01', 'YYYY-MM-DD'));
---
----- Insert 2
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user2', TO_DATE('2023-02-05', 'YYYY-MM-DD'));
---
----- Insert 3
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user3', TO_DATE('2023-03-12', 'YYYY-MM-DD'));
---
----- Insert 4
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user4', TO_DATE('2023-04-20', 'YYYY-MM-DD'));
---
----- Insert 5
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user5', TO_DATE('2023-05-17', 'YYYY-MM-DD'));
---
----- Insert 6
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user6', TO_DATE('2023-06-11', 'YYYY-MM-DD'));
---
----- Insert 7
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user7', TO_DATE('2023-07-28', 'YYYY-MM-DD'));
---
----- Insert 8
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user8', TO_DATE('2023-08-09', 'YYYY-MM-DD'));
---
----- Insert 9
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user9', TO_DATE('2023-09-14', 'YYYY-MM-DD'));
---
----- Insert 10
---INSERT INTO SS_audit_logon (userid, logdate)
---VALUES ('user10', TO_DATE('2023-10-30', 'YYYY-MM-DD'));
-
     
---###########View 1###########
---create view SS_basketitem_vu as
---   select * from SS_basketitem;
-----###########View 2###########
---CREATE OR REPLACE VIEW SS_ship_vu
--- AS SELECT b.idbasket, b.shipflag, bs.idstage, bs.dtstage, bs.notes,
---            bs.shipper, bs.shippingnum
---      FROM SS_basket b, SS_basketstatus bs
---      WHERE b.idBasket = bs.idBasket;
+CREATE INDEX shprFrstNme 
+ON SS_SHOPPER (UserName);
 
---UPDATE SS_basket
---  SET shipfirstname='John',shiplastname='Carter',
---      shipaddress='21 Front St.',shipcity='Raleigh',
---      shipstate='NC',shipzipcode='54822'
---   WHERE idBasket = 4;
---UPDATE SS_basket
---  SET shipfirstname='Margaret',shiplastname='Somner',
---      shipaddress='287 Walnut Drive',shipcity='Chesapeake',
---      shipstate='VA',shipzipcode='23321'
---   WHERE idBasket = 6;
---COMMIT;
---
+CREATE INDEX adTitle 
+ON SS_ADVERTISEMENT (AdvertisementTitle);

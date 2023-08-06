@@ -47,7 +47,7 @@ END;
 
 
 -- Test valid data
-EXEC SS_AddToCart(p_shopperId => 3005, p_advertisementId => 2001, p_quantity => 3);
+EXEC SS_AddToCart(p_shopperId => 3005, p_advertisementId => 2005, p_quantity => 3);
 
 select * from SS_CartItem;
 

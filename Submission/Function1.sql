@@ -1,3 +1,4 @@
+-- Calculates shipping values based on shipping_table
 CREATE OR REPLACE function SS_ShipCost (
     p_price IN NUMBER
 ) Return number
@@ -17,8 +18,6 @@ END;
 DECLARE
     v_shippingFee NUMBER;
 BEGIN
-    SS_ShipCost(100, v_shippingFee);
+    v_shippingFee := SS_ShipCost(250);
     DBMS_OUTPUT.PUT_LINE('Shipping Fee: ' || v_shippingFee);
 END;
-/
---select * from ss_cart;
