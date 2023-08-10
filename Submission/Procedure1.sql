@@ -34,7 +34,7 @@ BEGIN
     dbms_output.put_line(v_price);
 
     UPDATE SS_CartItem
-    SET Quantity = (Quantity + p_quantity), Price = (Price + v_price*p_quantity)
+    SET Quantity = (Quantity + p_quantity)
     WHERE (CartId = v_cartId) AND (AdvertisementId = p_advertisementId);
     
     IF SQL%NOTFOUND THEN
@@ -47,9 +47,24 @@ END;
 
 
 -- Test valid data
+select ss_cartitem.*,
+  ss_cart.quantity as "cart quantity",
+  ss_cart.subtotal as "cart subtotal",
+  ss_cart.shipping as "cart shipping",
+  ss_cart.tax as "cart tax",
+  ss_cart.total as "cart total"
+ from ss_cartitem, ss_cart
+ where ss_cart.shopperid = 3005
+  and ss_cartitem.cartid = ss_cart.cartid;
+
 EXEC SS_AddToCart(p_shopperId => 3005, p_advertisementId => 2005, p_quantity => 3);
 
-select * from SS_CartItem;
-
-select * from SS_Cart;
-
+select ss_cartitem.*,
+  ss_cart.quantity as "cart quantity",
+  ss_cart.subtotal as "cart subtotal",
+  ss_cart.shipping as "cart shipping",
+  ss_cart.tax as "cart tax",
+  ss_cart.total as "cart total"
+ from ss_cartitem, ss_cart
+ where ss_cart.shopperid = 3005
+  and ss_cartitem.cartid = ss_cart.cartid;

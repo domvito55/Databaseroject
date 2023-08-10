@@ -1,4 +1,4 @@
--- Calculates discounts for orders
+-- Calculates discounts for orders based on sub total values
 CREATE OR REPLACE FUNCTION ord_disc_sf1
   (p_id NUMBER)
   RETURN NUMBER
@@ -18,12 +18,16 @@ BEGIN
   ELSE
     RETURN 0;
   END IF;
+EXCEPTION
+ When NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('Cart id doesn''t exist');
+    return 0;  
 END;
 /
 DECLARE
-  lv_id_num NUMBER := 4002;
+  lv_id_num NUMBER := 5002;
   lv_disc_num NUMBER;
 BEGIN
   lv_disc_num := ord_disc_sf1(lv_id_num);
-  DBMS_OUTPUT.PUT_LINE('Discount' || lv_disc_num);
+  DBMS_OUTPUT.PUT_LINE('Discount: $' || lv_disc_num);
 END;

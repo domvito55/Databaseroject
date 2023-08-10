@@ -1,0 +1,54 @@
+Package --> CREATE OR REPLACE PACKAGE SS_Ship_Package AS
+
+  -- Function to calculate shipping cost
+  FUNCTION SS_ShipCost(p_price IN NUMBER) RETURN NUMBER;
+
+  -- Procedure to update shipping information
+  PROCEDURE Update_Shipping_Info(
+    p_low IN NUMBER,
+    p_high IN NUMBER,
+    p_fee IN NUMBER
+  );
+
+END SS_Ship_Package;
+/
+
+-- Create or replace the package body
+CREATE OR REPLACE PACKAGE BODY SS_Ship_Package AS
+
+  -- Function to calculate shipping cost based on price
+  FUNCTION SS_ShipCost(p_price IN NUMBER) RETURN NUMBER AS
+    p_ship NUMBER;
+  BEGIN
+    SELECT fee INTO p_ship
+    FROM ss_shipping
+    WHERE p_price >= low AND p_price <= high;
+    RETURN p_ship;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      -- Handle the case where the price range is not found
+      RETURN NULL;
+    WHEN OTHERS THEN
+      -- Handle other exceptions if necessary
+      RETURN NULL;
+  END SS_ShipCost;
+
+  -- Procedure to update shipping information in the table
+  PROCEDURE Update_Shipping_Info(
+    p_low IN NUMBER,
+    p_high IN NUMBER,
+    p_fee IN NUMBER
+  ) AS
+  BEGIN
+    UPDATE ss_shipping
+    SET fee = p_fee
+    WHERE low = p_low AND high = p_high;
+    COMMIT; -- Commit the transaction
+  EXCEPTION
+    WHEN OTHERS THEN
+      -- Handle exceptions if necessary
+      ROLLBACK; -- Rollback the transaction if an error occurs
+  END Update_Shipping_Info;
+
+END SS_Ship_Package;
+/
